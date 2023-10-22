@@ -2,13 +2,11 @@ const { io } = require('../index');
 const { tryJWT } = require('../helpers/jwt');
 const { connectedUser, disconnectedUser, saveMessage } = require('../controllers/socket');
 
-//Mensajes del server
+//Socket messages
 io.on('connection', client => {
-    console.log('Client connected');
-
     //validate authentication
     const [valid, uid] = tryJWT(client.handshake.headers['x-token'])
-
+    //verify authentication
     if (!valid) { return client.disconnect(); }
 
     //Authenticated client
@@ -22,18 +20,16 @@ io.on('connection', client => {
 
     //Listen personal messages
     client.on('personal-message', async (payload) => {
-        //TODO: save message
+        //Save message
         await saveMessage(payload);
-
         io.to(payload.to).emit('personal-message', payload);
     });
 
-
     client.on('disconnect', () => { disconnectedUser(uid); });
 
-    client.on('mensaje', (payload) => {
-        console.log('Mensaje', payload);
+    // client.on('mensaje', (payload) => {
+    //     console.log('Mensaje', payload);
 
-        io.emit('Mensaje', { admin: 'Nuevo Mensaje' });
-    });
+    //     io.emit('Mensaje', { admin: 'Nuevo Mensaje' });
+    // });
 });

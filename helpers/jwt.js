@@ -7,7 +7,6 @@ const generateJWT = (uid) => {
         jwt.sign(payload, process.env.JWT_KEY, {
             expiresIn: '24h'
         }, (err, token) => {
-
             if (err) {
                 //no se pudo crear el token
                 reject('Could not create JWT');
@@ -28,6 +27,5 @@ const tryJWT = (token = '') => {
         return [false, undefined];
     }
 }
-
 
 module.exports = { generateJWT, tryJWT }

@@ -46,9 +46,6 @@ const createUser = async (req, res = response) => {
 
 }
 
-//TODO:
-//const login ... req, res...
-//{ok: true, msg: 'login'}
 const login = async (req, res = response) => {
     const { email, password } = req.body;
     try {

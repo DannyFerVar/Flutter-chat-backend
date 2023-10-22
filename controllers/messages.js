@@ -10,7 +10,7 @@ const getChat = async (req, res) => {
 
     res.json({
         ok: true,
-        last30
+        messages: last30
     })
 
 }

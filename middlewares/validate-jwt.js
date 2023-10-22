@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const validateJWT = (req, res, next) => {
-
     //read token
     const token = req.header('x-token');
 
@@ -13,7 +12,6 @@ const validateJWT = (req, res, next) => {
     }
 
     try {
-
         const { uid } = jwt.verify(token, process.env.JWT_KEY);
         req.uid = uid;
 
@@ -25,7 +23,6 @@ const validateJWT = (req, res, next) => {
             msg: 'invalid token'
         });
     }
-
 }
 
 module.exports = { validateJWT }

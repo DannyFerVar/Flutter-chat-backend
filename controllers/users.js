@@ -14,7 +14,6 @@ const getUsers = async (req, res = response) => {
     res.json({
         ok: true,
         users,
-        since
     });
 
 }
