@@ -12,7 +12,7 @@ const createUser = async (req, res = response) => {
     try {
 
         const emailExists = await User.findOne({ email });
-        if (!emailExists) {
+        if (emailExists) {
             return res.status(400).json({
                 ok: false,
                 msg: 'Invalid User'

@@ -20,4 +20,14 @@ const generateJWT = (uid) => {
 
 }
 
-module.exports = { generateJWT }
+const tryJWT = (token = '') => {
+    try {
+        const { uid } = jwt.verify(token, process.env.JWT_KEY);
+        return [true, uid];
+    } catch (error) {
+        return [false, undefined];
+    }
+}
+
+
+module.exports = { generateJWT, tryJWT }
